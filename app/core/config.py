@@ -10,8 +10,8 @@ load_dotenv(dotenv_path=env_path)
 
 
 class Settings(BaseSettings):
-    PROJECT_TITLE: str = "GrkаAPI_pay_terminal"
-    PROJECT_VERSION: str = "0.0.1"
+    PROJECT_TITLE: str = "GrkAPI service pay terminal"
+    PROJECT_VERSION: str = "22.0.1"
 
 
     # подключения к базе
@@ -26,13 +26,9 @@ class Settings(BaseSettings):
     FIRST_SUPERUSER_PW: str = "qwerty12"
 
     BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = [
-        "http://localhost:3000",
-        "http://localhost:4200",
-        "http://localhost:8001"  # type: ignore
-     ]
-    # class Config:
-    #     env_prefix = "DB_"
-    #     env_file = "../../../.env"
-
+     #    "http://localhost:3000",
+     #    "http://localhost:4200",
+     #    "http://localhost:8001"  # type: ignore
+      ]
 
 settings = Settings()

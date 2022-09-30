@@ -1,9 +1,6 @@
 from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.api_v1.api import api_router
-# from app.database import engine, Model
-#
-# Model.metadata.create_all(bind=engine)
 from app.core.config import settings
 
 
@@ -27,9 +24,3 @@ def start_application():
 
 
 app = start_application()
-
-if __name__ == "__main__":
-    # Use this for debugging purposes only
-    import uvicorn
-
-    uvicorn.run("main:app", host="localhost", port=8001, log_level="debug")

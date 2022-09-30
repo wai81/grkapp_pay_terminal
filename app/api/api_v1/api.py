@@ -1,7 +1,6 @@
 from fastapi import APIRouter
 
-from app.api.api_v1.endpoints import (receipt,
-                                      pay_terminal)
+from app.api.api_v1.endpoints import pay_terminal
 
 api_router = APIRouter()
 # api_router.include_router(auth.router, prefix="/auth", tags=["Auth (Авторизация)"])
