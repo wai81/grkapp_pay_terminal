@@ -11,16 +11,21 @@ router = APIRouter()
 @router.get("/{number}", status_code=200, response_model=Receipt)
 def get_receipt(
         *,
-        number: str,
+        number: int,
         db: Session = Depends(get_db),
 ) -> dict:
     """
     Квитанция для оплаты по номеру квитанции
     """
-    obj = crud.receipt.find_by_number(db=db, number=number)
+    if len(str(number)) != 16:
+        raise HTTPException(
+            status_code=400, detail=f"Invalid receipt number"
+        )
+
+    obj = crud.receipt.find_by_number(db=db, number=str(number))
     if not obj:
         raise HTTPException(
-            status_code=400, detail=f"Recipe with number: {number} not found."
+            status_code=400, detail=f"Recipe with number: {number} not found"
         )
 
     return obj
@@ -29,14 +34,19 @@ def get_receipt(
 @router.put("/{number}", status_code=201, response_model=ReceiptInDB)
 def change_status_receipt(
         *,
-        number: str,
+        number: int,
         obj_in: ReceiptUpdateStatus,
         db: Session = Depends(get_db)
 ) -> dict:
     """
     Изменить квитанцию для оплаты
     """
-    obj = crud.receipt.find_by_number(db=db, number=number)
+    if len(str(number)) != 16:
+        raise HTTPException(
+            status_code=400, detail=f"Invalid receipt number"
+        )
+
+    obj = crud.receipt.find_by_number(db=db, number=str(number))
     if not obj:
         raise HTTPException(
             status_code=400, detail=f"Recipe with number: {number} not found."
